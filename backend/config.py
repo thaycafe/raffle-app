@@ -9,14 +9,16 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    raffle_title: str = "Rifa"
-    raffle_prize: str = "Prémio surpresa"
+    raffle_title: str = "Raffle App"
+    raffle_prize: str = "Mystery prize"
     raffle_total_numbers: int = 100
     raffle_price: float = 10.00
     raffle_currency: str = "EUR"
 
     admin_username: str = "admin"
     admin_password: str = "changeme"
+
+    database_url: str = "sqlite:///./raffle.db"
 
 
 settings = Settings()

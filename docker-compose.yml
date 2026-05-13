@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: ./backend
+    container_name: raffle-backend
+    restart: unless-stopped
+    environment:
+      RAFFLE_TITLE: ${RAFFLE_TITLE:-Raffle}
+      RAFFLE_PRIZE: ${RAFFLE_PRIZE:-Mystery prize}
+      RAFFLE_TOTAL_NUMBERS: ${RAFFLE_TOTAL_NUMBERS:-100}
+      RAFFLE_PRICE: ${RAFFLE_PRICE:-5.00}
+      RAFFLE_CURRENCY: ${RAFFLE_CURRENCY:-EUR}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-changeme}
+    volumes:
+      - raffle-data:/data
+    networks:
+      - internal
+
+  frontend:
+    build: ./frontend
+    container_name: raffle-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - internal
+      - proxy
+
+volumes:
+  raffle-data:
+
+networks:
+  internal:
+  proxy:
+    external: true
