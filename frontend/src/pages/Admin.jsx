@@ -15,7 +15,7 @@ function Admin() {
 
   const logout = () => {
     clearAuth()
-    navigate('/admin/login')
+    navigate('/')
   }
 
   const loadTickets = async () => {
@@ -45,12 +45,16 @@ function Admin() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const togglePaid = async (number) => {
-    setBusy(number)
+  const togglePaid = async (ticket) => {
+    setBusy(ticket.number)
     try {
-      const res = await fetch(`/api/admin/tickets/${number}/paid`, {
+      const res = await fetch(`/api/admin/tickets/${ticket.number}/paid`, {
         method: 'PATCH',
-        headers: authHeader(),
+        headers: {
+          ...authHeader(),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ paid: !ticket.paid }),
       })
       if (!res.ok) throw new Error('Failed to update')
       await loadTickets()
@@ -94,7 +98,7 @@ function Admin() {
           </div>
           <button
             onClick={logout}
-            className="text-sm text-slate-600 hover:text-slate-900 transition"
+            className="text-sm font-medium text-slate-700 bg-gray-100 border border-slate-300 px-4 py-2 rounded-lg hover:bg-gray-300 hover:border-slate-400 transition cursor-pointer"
           >
             {t('admin.signOut')}
           </button>
@@ -127,7 +131,7 @@ function Admin() {
                       <td className="pr-4 text-slate-600">{ticket.phone}</td>
                       <td className="pr-4">
                         <button
-                          onClick={() => togglePaid(ticket.number)}
+                          onClick={() => togglePaid(ticket)}
                           disabled={isBusy}
                           className={`px-2 py-0.5 rounded text-xs font-medium transition ${
                             ticket.paid

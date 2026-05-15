@@ -1,1 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f9fafb;
+}

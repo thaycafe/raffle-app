@@ -31,3 +31,7 @@ class RaffleConfig(BaseModel):
     total_numbers: int
     price: float
     currency: str
+
+
+class TicketPaidUpdate(BaseModel):
+    paid: bool
