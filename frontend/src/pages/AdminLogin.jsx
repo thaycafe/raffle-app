@@ -51,15 +51,13 @@ function AdminLogin() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm p-8">
-          <h1 className="text-2xl font-bold text-slate-900 mb-6">
-            {t('admin.title')}
-          </h1>
+          <h1 className="text-2xl font-bold text-slate-900 mb-6">{t('admin.title')}</h1>
 
           <input
             type="text"
             placeholder={t('admin.username')}
             value={user}
-            onChange={e => setUser(e.target.value)}
+            onChange={(e) => setUser(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border border-slate-300 mb-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             autoComplete="username"
           />
@@ -67,8 +65,8 @@ function AdminLogin() {
             type="password"
             placeholder={t('admin.password')}
             value={pass}
-            onChange={e => setPass(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleLogin()}
+            onChange={(e) => setPass(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
             className="w-full px-4 py-3 rounded-lg border border-slate-300 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             autoComplete="current-password"
           />

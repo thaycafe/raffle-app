@@ -11,6 +11,7 @@ function Admin() {
 
   const [tickets, setTickets] = useState([])
   const [error, setError] = useState('')
+  const [busy, setBusy] = useState(null) // número do ticket em ação
 
   const logout = () => {
     clearAuth()
@@ -22,7 +23,8 @@ function Admin() {
     try {
       const res = await fetch('/api/admin/tickets', { headers: authHeader() })
       if (res.status === 401) {
-        logout()
+        clearAuth()
+        navigate('/admin/login')
         return
       }
       if (!res.ok) throw new Error('Failed to load')
@@ -33,13 +35,48 @@ function Admin() {
   }
 
   useEffect(() => {
-    // se não tem auth, manda pra tela de login
     if (!getAuth()) {
       navigate('/admin/login')
       return
     }
+    // load data once on mount; safe to ignore set-state-in-effect here
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadTickets()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const togglePaid = async (number) => {
+    setBusy(number)
+    try {
+      const res = await fetch(`/api/admin/tickets/${number}/paid`, {
+        method: 'PATCH',
+        headers: authHeader(),
+      })
+      if (!res.ok) throw new Error('Failed to update')
+      await loadTickets()
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setBusy(null)
+    }
+  }
+
+  const removeTicket = async (number) => {
+    if (!confirm(t('admin.confirmDelete', { number }))) return
+    setBusy(number)
+    try {
+      const res = await fetch(`/api/admin/tickets/${number}`, {
+        method: 'DELETE',
+        headers: authHeader(),
+      })
+      if (!res.ok) throw new Error('Failed to delete')
+      await loadTickets()
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setBusy(null)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
@@ -50,9 +87,7 @@ function Admin() {
 
         <header className="bg-white rounded-2xl shadow-sm p-6 mb-6 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
-              {t('admin.dashboardTitle')}
-            </h1>
+            <h1 className="text-2xl font-bold text-slate-900">{t('admin.dashboardTitle')}</h1>
             <p className="text-slate-500 text-sm mt-1">
               {tickets.length} {t('admin.reservations')}
             </p>
@@ -69,9 +104,7 @@ function Admin() {
           {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
 
           {tickets.length === 0 ? (
-            <p className="text-slate-500 text-center py-6">
-              {t('admin.empty')}
-            </p>
+            <p className="text-slate-500 text-center py-6">{t('admin.empty')}</p>
           ) : (
             <table className="w-full text-sm">
               <thead>
@@ -80,33 +113,46 @@ function Admin() {
                   <th className="pr-4">{t('admin.name')}</th>
                   <th className="pr-4">{t('admin.phone')}</th>
                   <th className="pr-4">{t('admin.paid')}</th>
-                  <th>{t('admin.reservedAt')}</th>
+                  <th className="pr-4">{t('admin.reservedAt')}</th>
+                  <th className="text-right">{t('admin.actions')}</th>
                 </tr>
               </thead>
               <tbody>
-                {tickets.map(ticket => (
-                  <tr key={ticket.number} className="border-b border-slate-100">
-                    <td className="py-2 pr-4 font-mono">{ticket.number}</td>
-                    <td className="pr-4">{ticket.name}</td>
-                    <td className="pr-4 text-slate-600">{ticket.phone}</td>
-                    <td className="pr-4">
-                      <span
-                        className={`px-2 py-0.5 rounded text-xs font-medium ${
-                          ticket.paid
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}
-                      >
-                        {ticket.paid ? t('admin.paidYes') : t('admin.paidNo')}
-                      </span>
-                    </td>
-                    <td className="text-xs text-slate-500">
-                      {ticket.reserved_at
-                        ? new Date(ticket.reserved_at).toLocaleString()
-                        : ''}
-                    </td>
-                  </tr>
-                ))}
+                {tickets.map((ticket) => {
+                  const isBusy = busy === ticket.number
+                  return (
+                    <tr key={ticket.number} className="border-b border-slate-100">
+                      <td className="py-2 pr-4 font-mono">{ticket.number}</td>
+                      <td className="pr-4">{ticket.name}</td>
+                      <td className="pr-4 text-slate-600">{ticket.phone}</td>
+                      <td className="pr-4">
+                        <button
+                          onClick={() => togglePaid(ticket.number)}
+                          disabled={isBusy}
+                          className={`px-2 py-0.5 rounded text-xs font-medium transition ${
+                            ticket.paid
+                              ? 'bg-green-100 text-green-800 hover:bg-green-200'
+                              : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200'
+                          } ${isBusy ? 'opacity-50 cursor-wait' : 'cursor-pointer'}`}
+                        >
+                          {ticket.paid ? t('admin.paidYes') : t('admin.paidNo')}
+                        </button>
+                      </td>
+                      <td className="pr-4 text-xs text-slate-500">
+                        {ticket.reserved_at ? new Date(ticket.reserved_at).toLocaleString() : ''}
+                      </td>
+                      <td className="text-right">
+                        <button
+                          onClick={() => removeTicket(ticket.number)}
+                          disabled={isBusy}
+                          className="text-xs text-red-600 hover:text-red-800 hover:underline disabled:opacity-50 disabled:cursor-wait transition"
+                        >
+                          {t('admin.delete')}
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           )}

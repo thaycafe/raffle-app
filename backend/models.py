@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
+
 from database import Base
+
 
 class Ticket(Base):
     __tablename__ = "tickets"
@@ -9,5 +11,3 @@ class Ticket(Base):
     phone = Column(String, nullable=False)
     paid = Column(Boolean, default=False, nullable=False)
     reserved_at = Column(DateTime, nullable=True)
-
-    

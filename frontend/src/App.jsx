@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import LanguageToggle from './components/LanguageToggle'
+import { Link } from 'react-router-dom'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -16,12 +17,14 @@ function App() {
 
   const loadTickets = () => {
     fetch('/api/tickets')
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(setTickets)
   }
 
   useEffect(() => {
-    fetch('/api/config').then(r => r.json()).then(setConfig)
+    fetch('/api/config')
+      .then((r) => r.json())
+      .then(setConfig)
     loadTickets()
   }, [])
 
@@ -70,13 +73,12 @@ function App() {
     )
   }
 
-  const takenCount = tickets.filter(ticket => ticket.taken).length
+  const takenCount = tickets.filter((ticket) => ticket.taken).length
   const availableCount = config.total_numbers - takenCount
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
       <div className="max-w-3xl mx-auto">
-
         {/* Language toggle */}
         <div className="flex justify-end mb-2">
           <LanguageToggle />
@@ -85,8 +87,7 @@ function App() {
         <header className="bg-white rounded-2xl shadow-sm p-6 mb-6">
           <h1 className="text-3xl font-bold text-slate-900">{config.title}</h1>
           <p className="text-slate-600 mt-2">
-            {t('header.prize')}{' '}
-            <span className="font-semibold text-slate-900">{config.prize}</span>
+            {t('header.prize')} <span className="font-semibold text-slate-900">{config.prize}</span>
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
             <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
@@ -112,13 +113,12 @@ function App() {
         )}
 
         <section className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-slate-900">
-            {t('pickNumber')}
-          </h2>
+          <h2 className="text-xl font-semibold mb-4 text-slate-900">{t('pickNumber')}</h2>
           <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
-            {tickets.map(ticket => {
+            {tickets.map((ticket) => {
               const isSelected = selected === ticket.number
-              const base = 'aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition'
+              const base =
+                'aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition'
 
               if (ticket.taken) {
                 return (
@@ -135,10 +135,11 @@ function App() {
                 <button
                   key={ticket.number}
                   onClick={() => setSelected(ticket.number)}
-                  className={`${base} ${isSelected
-                    ? 'bg-indigo-600 text-white shadow-md scale-105'
-                    : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
-                    }`}
+                  className={`${base} ${
+                    isSelected
+                      ? 'bg-indigo-600 text-white shadow-md scale-105'
+                      : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
+                  }`}
                 >
                   {ticket.number}
                 </button>
@@ -151,9 +152,7 @@ function App() {
           <h2 className="text-xl font-semibold mb-4 text-slate-900">
             {t('yourDetails')}{' '}
             {selected && (
-              <span className="text-indigo-600">
-                {t('ofNumber', { number: selected })}
-              </span>
+              <span className="text-indigo-600">{t('ofNumber', { number: selected })}</span>
             )}
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -161,14 +160,14 @@ function App() {
               type="text"
               placeholder={t('form.name')}
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               className="px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
             <input
               type="tel"
               placeholder={t('form.phone')}
               value={phone}
-              onChange={e => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
               className="px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
@@ -181,6 +180,14 @@ function App() {
             {submitting ? t('form.submitting') : t('form.submit')}
           </button>
         </section>
+        <footer className="mt-8 text-center">
+          <Link
+            to="/admin/login"
+            className="text-xs text-slate-400 hover:text-slate-600 transition"
+          >
+            {t('footer.admin')}
+          </Link>
+        </footer>
       </div>
     </div>
   )

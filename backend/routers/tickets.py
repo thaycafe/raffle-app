@@ -1,14 +1,16 @@
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
 
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from config import settings
 from database import get_db
 from models import Ticket
-from schemas import TicketPublic, ReserveRequest, RaffleConfig
-from config import settings
+from schemas import RaffleConfig, ReserveRequest, TicketPublic
 
 router = APIRouter(tags=["Tickets"])
+
 
 @router.get("/tickets", response_model=list[TicketPublic])
 def list_tickets(db: Session = Depends(get_db)):
@@ -19,12 +21,12 @@ def list_tickets(db: Session = Depends(get_db)):
         for n in range(1, settings.raffle_total_numbers + 1)
     ]
 
+
 @router.post("/reserve", response_model=TicketPublic)
 def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
-
     if payload.number > settings.raffle_total_numbers:
         raise HTTPException(status_code=400, detail="Number out of range")
-    
+
     existing = db.query(Ticket).filter(Ticket.number == payload.number).first()
     if existing:
         raise HTTPException(status_code=409, detail="Number already reserved")
@@ -38,12 +40,12 @@ def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
     )
 
     db.add(ticket)
-    
+
     try:
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=409, detail="Number already reserved")
+        raise HTTPException(status_code=409, detail="Number already reserved") from None
 
     db.refresh(ticket)
 

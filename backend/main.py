@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
-from database import engine, Base
-from models import Ticket
-from routers import tickets, admin
+from database import Base, engine
+from routers import admin, tickets
 
 Base.metadata.create_all(bind=engine)
 

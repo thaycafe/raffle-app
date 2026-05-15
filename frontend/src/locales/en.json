@@ -1,47 +1,53 @@
 {
-    "loading": "Loading...",
-    "header": {
-        "prize": "Prize:",
-        "perTicket": "per ticket",
-        "available": "available",
-        "taken": "taken"
-    },
-    "success": {
-        "reserved": "Number <0>{{number}}</0> reserved for <0>{{name}}</0>."
-    },
-    "pickNumber": "Pick a number",
-    "yourDetails": "Your details",
-    "ofNumber": "(number {{number}})",
-    "form": {
-        "name": "Name",
-        "phone": "Phone",
-        "missingFields": "Pick a number and fill in name and phone.",
-        "submit": "Reserve number",
-        "submitting": "Reserving...",
-        "failed": "Reservation failed"
-    },
-    "language": {
-        "label": "Language",
-        "en": "English",
-        "pt": "Português"
-    },
-    "admin": {
-        "title": "Admin",
-        "username": "Username",
-        "password": "Password",
-        "signIn": "Sign in",
-        "signOut": "Sign out",
-        "loginFailed": "Invalid credentials",
-        "dashboardTitle": "Reservations",
-        "reservations": "reservations",
-        "empty": "No reservations yet.",
-        "name": "Name",
-        "phone": "Phone",
-        "paid": "Paid",
-        "reservedAt": "Reserved at",
-        "paidYes": "Paid",
-        "paidNo": "Pending",
-        "missingFields": "Fill in username and password",
-        "signingIn": "Signing in..."
-    }
+  "loading": "Loading...",
+  "header": {
+    "prize": "Prize:",
+    "perTicket": "per ticket",
+    "available": "available",
+    "taken": "taken"
+  },
+  "success": {
+    "reserved": "Number <0>{{number}}</0> reserved for <0>{{name}}</0>."
+  },
+  "pickNumber": "Pick a number",
+  "yourDetails": "Your details",
+  "ofNumber": "(number {{number}})",
+  "form": {
+    "name": "Name",
+    "phone": "Phone",
+    "missingFields": "Pick a number and fill in name and phone.",
+    "submit": "Reserve number",
+    "submitting": "Reserving...",
+    "failed": "Reservation failed"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "pt": "Português"
+  },
+  "admin": {
+    "title": "Admin",
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "loginFailed": "Invalid credentials",
+    "dashboardTitle": "Reservations",
+    "reservations": "reservations",
+    "empty": "No reservations yet.",
+    "name": "Name",
+    "phone": "Phone",
+    "paid": "Paid",
+    "reservedAt": "Reserved at",
+    "paidYes": "Paid",
+    "paidNo": "Pending",
+    "missingFields": "Fill in username and password",
+    "signingIn": "Signing in...",
+    "actions": "Actions",
+    "delete": "Delete",
+    "confirmDelete": "Remove reservation for number {{number}}?"
+  },
+  "footer": {
+    "admin": "Admin"
+  }
 }
