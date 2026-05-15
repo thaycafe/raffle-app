@@ -1,0 +1,47 @@
+{
+    "loading": "Carregando...",
+    "header": {
+        "prize": "Prêmio:",
+        "perTicket": "por bilhete",
+        "available": "disponíveis",
+        "taken": "reservados"
+    },
+    "success": {
+        "reserved": "Número <0>{{number}}</0> reservado para <0>{{name}}</0>."
+    },
+    "pickNumber": "Escolha um número",
+    "yourDetails": "Seus dados",
+    "ofNumber": "(número {{number}})",
+    "form": {
+        "name": "Nome",
+        "phone": "Telefone",
+        "missingFields": "Escolha um número e preencha nome e telefone.",
+        "submit": "Reservar número",
+        "submitting": "Reservando...",
+        "failed": "Não foi possível reservar"
+    },
+    "language": {
+        "label": "Idioma",
+        "en": "English",
+        "pt": "Português"
+    },
+    "admin": {
+        "title": "Admin",
+        "username": "Usuário",
+        "password": "Senha",
+        "missingFields": "Preencha usuário e senha",
+        "signingIn": "Entrando...",
+        "signIn": "Entrar",
+        "signOut": "Sair",
+        "loginFailed": "Credenciais inválidas",
+        "dashboardTitle": "Reservas",
+        "reservations": "reservas",
+        "empty": "Sem reservas ainda.",
+        "name": "Nome",
+        "phone": "Telefone",
+        "paid": "Pago",
+        "reservedAt": "Reservado em",
+        "paidYes": "Pago",
+        "paidNo": "Pendente"
+    }
+}

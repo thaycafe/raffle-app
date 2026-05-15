@@ -2,19 +2,18 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Instala uv
+# Install uv
 RUN pip install --no-cache-dir uv
 
-# Copia primeiro os arquivos de lock (camada de cache)
+# Copy lock files first (cache layer)
 COPY pyproject.toml uv.lock ./
 
-# Sincroniza dependências (sem instalar o projeto, só as deps)
+# Sync dependencias (without installing project files)
 RUN uv sync --frozen --no-install-project
 
-# Copia o resto do código
 COPY . .
 
-# Pasta pra o SQLite (volume será montado aqui)
+# Directory for SQLite (volume will be mounted here)
 RUN mkdir -p /data
 ENV DATABASE_URL=sqlite:////data/raffle.db
 

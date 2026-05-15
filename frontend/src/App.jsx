@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useTranslation, Trans } from 'react-i18next'
+import LanguageToggle from './components/LanguageToggle'
 
 function App() {
+  const { t, i18n } = useTranslation()
+
   const [config, setConfig] = useState(null)
   const [tickets, setTickets] = useState([])
   const [selected, setSelected] = useState(null)
@@ -21,9 +25,13 @@ function App() {
     loadTickets()
   }, [])
 
+  useEffect(() => {
+    document.documentElement.lang = i18n.resolvedLanguage
+  }, [i18n.resolvedLanguage])
+
   const handleSubmit = async () => {
     if (!selected || !name.trim() || !phone.trim()) {
-      setError('Pick a number and fill in name and phone.')
+      setError(t('form.missingFields'))
       return
     }
 
@@ -39,7 +47,7 @@ function App() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))
-        throw new Error(data.detail || 'Reservation failed')
+        throw new Error(data.detail || t('form.failed'))
       }
 
       setSuccess({ number: selected, name })
@@ -57,70 +65,82 @@ function App() {
   if (!config) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-500">
-        Loading...
+        {t('loading')}
       </div>
     )
   }
 
-  const takenCount = tickets.filter(t => t.taken).length
+  const takenCount = tickets.filter(ticket => ticket.taken).length
   const availableCount = config.total_numbers - takenCount
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
       <div className="max-w-3xl mx-auto">
+
+        {/* Language toggle */}
+        <div className="flex justify-end mb-2">
+          <LanguageToggle />
+        </div>
+
         <header className="bg-white rounded-2xl shadow-sm p-6 mb-6">
           <h1 className="text-3xl font-bold text-slate-900">{config.title}</h1>
           <p className="text-slate-600 mt-2">
-            Prize: <span className="font-semibold text-slate-900">{config.prize}</span>
+            {t('header.prize')}{' '}
+            <span className="font-semibold text-slate-900">{config.prize}</span>
           </p>
           <div className="flex flex-wrap gap-2 mt-4">
             <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
-              {config.price} {config.currency} per ticket
+              {config.price} {config.currency} {t('header.perTicket')}
             </span>
             <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-              {availableCount} available
+              {availableCount} {t('header.available')}
             </span>
             <span className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">
-              {takenCount} / {config.total_numbers} taken
+              {takenCount} / {config.total_numbers} {t('header.taken')}
             </span>
           </div>
         </header>
 
         {success && (
           <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-xl mb-6">
-            Number <strong>{success.number}</strong> reserved for <strong>{success.name}</strong>.
+            <Trans
+              i18nKey="success.reserved"
+              values={{ number: success.number, name: success.name }}
+              components={{ 0: <strong /> }}
+            />
           </div>
         )}
 
         <section className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-slate-900">Pick a number</h2>
+          <h2 className="text-xl font-semibold mb-4 text-slate-900">
+            {t('pickNumber')}
+          </h2>
           <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
-            {tickets.map(t => {
-              const isSelected = selected === t.number
+            {tickets.map(ticket => {
+              const isSelected = selected === ticket.number
               const base = 'aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition'
 
-              if (t.taken) {
+              if (ticket.taken) {
                 return (
                   <div
-                    key={t.number}
+                    key={ticket.number}
                     className={`${base} bg-slate-100 text-slate-400 cursor-not-allowed line-through`}
                   >
-                    {t.number}
+                    {ticket.number}
                   </div>
                 )
               }
 
               return (
                 <button
-                  key={t.number}
-                  onClick={() => setSelected(t.number)}
-                  className={`${base} ${
-                    isSelected
-                      ? 'bg-indigo-600 text-white shadow-md scale-105'
-                      : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
-                  }`}
+                  key={ticket.number}
+                  onClick={() => setSelected(ticket.number)}
+                  className={`${base} ${isSelected
+                    ? 'bg-indigo-600 text-white shadow-md scale-105'
+                    : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
+                    }`}
                 >
-                  {t.number}
+                  {ticket.number}
                 </button>
               )
             })}
@@ -129,19 +149,24 @@ function App() {
 
         <section className="bg-white rounded-2xl shadow-sm p-6">
           <h2 className="text-xl font-semibold mb-4 text-slate-900">
-            Your details {selected && <span className="text-indigo-600">(number {selected})</span>}
+            {t('yourDetails')}{' '}
+            {selected && (
+              <span className="text-indigo-600">
+                {t('ofNumber', { number: selected })}
+              </span>
+            )}
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
             <input
               type="text"
-              placeholder="Name"
+              placeholder={t('form.name')}
               value={name}
               onChange={e => setName(e.target.value)}
               className="px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
             <input
               type="tel"
-              placeholder="Phone (MBWay)"
+              placeholder={t('form.phone')}
               value={phone}
               onChange={e => setPhone(e.target.value)}
               className="px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
@@ -153,7 +178,7 @@ function App() {
             disabled={submitting || !selected}
             className="mt-4 px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition"
           >
-            {submitting ? 'Reserving...' : 'Reserve number'}
+            {submitting ? t('form.submitting') : t('form.submit')}
           </button>
         </section>
       </div>

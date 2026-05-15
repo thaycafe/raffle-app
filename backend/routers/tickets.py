@@ -23,11 +23,11 @@ def list_tickets(db: Session = Depends(get_db)):
 def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
 
     if payload.number > settings.raffle_total_numbers:
-        raise HTTPException(status_code=400, detail="Número fora do intervalo")
+        raise HTTPException(status_code=400, detail="Number out of range")
     
     existing = db.query(Ticket).filter(Ticket.number == payload.number).first()
     if existing:
-        raise HTTPException(status_code=409, detail="Número já reservado")
+        raise HTTPException(status_code=409, detail="Number already reserved")
 
     ticket = Ticket(
         number=payload.number,
@@ -43,7 +43,7 @@ def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=409, detail="Número já reservado")
+        raise HTTPException(status_code=409, detail="Number already reserved")
 
     db.refresh(ticket)
 
