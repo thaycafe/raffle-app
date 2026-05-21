@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from config import Prize
+
 
 class TicketPublic(BaseModel):
     number: int
@@ -27,7 +29,7 @@ class ReserveRequest(BaseModel):
 
 class RaffleConfig(BaseModel):
     title: str
-    prize: str
+    prizes: list[Prize]
     total_numbers: int
     price: float
     currency: str

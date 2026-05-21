@@ -1,7 +1,7 @@
 {
   "loading": "Loading...",
   "header": {
-    "prize": "Prize:",
+    "prizes": "Prizes:",
     "perTicket": "per ticket",
     "available": "available",
     "taken": "taken"
@@ -29,6 +29,8 @@
     "title": "Admin",
     "username": "Username",
     "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "signIn": "Sign in",
     "signOut": "Sign out",
     "loginFailed": "Invalid credentials",

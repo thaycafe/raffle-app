@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import LanguageToggle from '../components/LanguageToggle'
 import { setAuth, encodeCredentials } from '../lib/auth'
+import { Eye, EyeOff } from 'lucide-react'
 
 function AdminLogin() {
   const { t } = useTranslation()
@@ -13,6 +14,7 @@ function AdminLogin() {
   const [pass, setPass] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = async () => {
     if (!user.trim() || !pass.trim()) {
@@ -61,15 +63,25 @@ function AdminLogin() {
             className="w-full px-4 py-3 rounded-lg border border-slate-300 mb-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             autoComplete="username"
           />
-          <input
-            type="password"
-            placeholder={t('admin.password')}
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            autoComplete="current-password"
-          />
+          <div className="relative mb-4">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder={t('admin.password')}
+              value={pass}
+              onChange={e => setPass(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleLogin()}
+              className="w-full px-4 py-3 pr-12 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              autoComplete="current-password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? t('admin.hidePassword') : t('admin.showPassword')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
 
           {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
 

@@ -86,9 +86,24 @@ function App() {
 
         <header className="bg-white rounded-2xl shadow-sm p-6 mb-6">
           <h1 className="text-3xl font-bold text-slate-900">{config.title}</h1>
-          <p className="text-slate-600 mt-2">
-            {t('header.prize')} <span className="font-semibold text-slate-900">{config.prize}</span>
-          </p>
+          <div className="mt-3">
+            <p className="text-slate-600 font-medium mb-1">{t('header.prizes')}</p>
+            <ol className="space-y-1">
+              {config.prizes.map((prize, index) => (
+                <li key={index} className="flex items-baseline gap-2">
+                  <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-indigo-100 text-indigo-800 rounded-full text-xs font-bold">
+                    {prize.position}
+                  </span>
+                  <span>
+                    <span className="font-semibold text-slate-900">{prize.title}</span>
+                    {prize.description && (
+                      <span className="text-slate-500 text-sm"> — {prize.description}</span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
           <div className="flex flex-wrap gap-2 mt-4">
             <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium">
               {config.price} {config.currency} {t('header.perTicket')}
@@ -135,11 +150,10 @@ function App() {
                 <button
                   key={ticket.number}
                   onClick={() => setSelected(ticket.number)}
-                  className={`${base} ${
-                    isSelected
+                  className={`${base} ${isSelected
                       ? 'bg-indigo-600 text-white shadow-md scale-105'
                       : 'bg-white border-2 border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
-                  }`}
+                    }`}
                 >
                   {ticket.number}
                 </button>

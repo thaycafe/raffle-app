@@ -30,3 +30,15 @@ def update_paid(number: int, payload: TicketPaidUpdate, db: Session = Depends(ge
     db.commit()
     db.refresh(ticket)
     return ticket
+
+
+@router.delete("/tickets/{number}", status_code=204)
+def delete_ticket(number: int, db: Session = Depends(get_db)):
+    ticket = db.query(Ticket).filter(Ticket.number == number).first()
+
+    if not ticket:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+
+    db.delete(ticket)
+    db.commit()
+    return None

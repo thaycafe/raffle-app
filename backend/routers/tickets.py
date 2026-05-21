@@ -56,7 +56,7 @@ def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
 def get_config():
     return RaffleConfig(
         title=settings.raffle_title,
-        prize=settings.raffle_prize,
+        prizes=settings.raffle_prizes,
         total_numbers=settings.raffle_total_numbers,
         price=settings.raffle_price,
         currency=settings.raffle_currency,

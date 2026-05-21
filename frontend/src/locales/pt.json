@@ -1,7 +1,7 @@
 {
   "loading": "Carregando...",
   "header": {
-    "prize": "Prêmio:",
+   "prizes": "Prêmios:",
     "perTicket": "por bilhete",
     "available": "disponíveis",
     "taken": "reservados"
@@ -29,6 +29,8 @@
     "title": "Admin",
     "username": "Usuário",
     "password": "Senha",
+    "showPassword": "Mostrar senha",
+    "hidePassword": "Ocultar senha",
     "missingFields": "Preencha usuário e senha",
     "signingIn": "Entrando...",
     "signIn": "Entrar",
