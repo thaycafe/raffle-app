@@ -7,7 +7,7 @@
     "taken": "taken"
   },
   "success": {
-    "reserved": "Number <0>{{number}}</0> reserved for <0>{{name}}</0>."
+    "reservedMultiple": "Numbers <0>{{numbers}}</0> reserved for <0>{{name}}</0>."
   },
   "pickNumber": "Pick a number",
   "yourDetails": "Your details",
@@ -15,10 +15,12 @@
   "form": {
     "name": "Name",
     "phone": "Phone",
-    "missingFields": "Pick a number and fill in name and phone.",
-    "submit": "Reserve number",
+    "missingFields": "Pick at least one number and fill in name and phone.",
+    "submit": "Reserve ({{count}})",
     "submitting": "Reserving...",
-    "failed": "Reservation failed"
+    "failed": "Reservation failed",
+    "selectedCount": "{{count}} number(s) selected",
+    "noneSelected": "No numbers selected yet"
   },
   "language": {
     "label": "Language",

@@ -1,13 +1,13 @@
 {
   "loading": "Carregando...",
   "header": {
-   "prizes": "Prêmios:",
+    "prizes": "Prêmios:",
     "perTicket": "por bilhete",
     "available": "disponíveis",
     "taken": "reservados"
   },
   "success": {
-    "reserved": "Número <0>{{number}}</0> reservado para <0>{{name}}</0>."
+    "reservedMultiple": "Números <0>{{numbers}}</0> reservados para <0>{{name}}</0>."
   },
   "pickNumber": "Escolha um número",
   "yourDetails": "Seus dados",
@@ -15,10 +15,12 @@
   "form": {
     "name": "Nome",
     "phone": "Telefone",
-    "missingFields": "Escolha um número e preencha nome e telefone.",
-    "submit": "Reservar número",
+    "missingFields": "Escolha pelo menos um número e preencha nome e telefone.",
+    "submit": "Reservar ({{count}})",
     "submitting": "Reservando...",
-    "failed": "Não foi possível reservar"
+    "failed": "Não foi possível reservar",
+    "selectedCount": "{{count}} número(s) selecionado(s)",
+    "noneSelected": "Nenhum número selecionado ainda"
   },
   "language": {
     "label": "Idioma",

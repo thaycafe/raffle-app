@@ -22,9 +22,13 @@ class TicketAdmin(BaseModel):
 
 
 class ReserveRequest(BaseModel):
-    number: int = Field(..., ge=1)
+    numbers: list[int] = Field(..., min_length=1)
     name: str = Field(..., min_length=1, max_length=100)
     phone: str = Field(..., min_length=3, max_length=30)
+
+
+class ReserveResponse(BaseModel):
+    reserved: list[int]
 
 
 class RaffleConfig(BaseModel):

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.exc import IntegrityError
@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from config import settings
 from database import get_db
 from models import Ticket
-from schemas import RaffleConfig, ReserveRequest, TicketPublic
+from schemas import RaffleConfig, ReserveRequest, ReserveResponse, TicketPublic
 
 router = APIRouter(tags=["Tickets"])
 
@@ -22,34 +22,42 @@ def list_tickets(db: Session = Depends(get_db)):
     ]
 
 
-@router.post("/reserve", response_model=TicketPublic)
+@router.post("/reserve", response_model=ReserveResponse, status_code=201)
 def reserve(payload: ReserveRequest, db: Session = Depends(get_db)):
-    if payload.number > settings.raffle_total_numbers:
-        raise HTTPException(status_code=400, detail="Number out of range")
 
-    existing = db.query(Ticket).filter(Ticket.number == payload.number).first()
+    numbers = sorted(set(payload.numbers))
+
+    for n in numbers:
+        if n < 1 or n > settings.raffle_total_numbers:
+            raise HTTPException(status_code=400, detail=f"Number {n} out of range")
+
+    existing = db.query(Ticket).filter(Ticket.number.in_(numbers)).all()
+
     if existing:
-        raise HTTPException(status_code=409, detail="Number already reserved")
+        taken = sorted(t.number for t in existing)
+        raise HTTPException(status_code=409, detail=f"Numbers already reserved: {taken}")
 
-    ticket = Ticket(
-        number=payload.number,
-        name=payload.name.strip(),
-        phone=payload.phone.strip(),
-        paid=False,
-        reserved_at=datetime.utcnow(),
-    )
-
-    db.add(ticket)
+    now = datetime.now(UTC)
+    for n in numbers:
+        db.add(
+            Ticket(
+                number=n,
+                name=payload.name.strip(),
+                phone=payload.phone.strip(),
+                paid=False,
+                reserved_at=now,
+            )
+        )
 
     try:
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=409, detail="Number already reserved") from None
+        raise HTTPException(
+            status_code=409, detail="One or more numbers were just reserved by someone else"
+        ) from None
 
-    db.refresh(ticket)
-
-    return TicketPublic(number=ticket.number, taken=True)
+    return ReserveResponse(reserved=numbers)
 
 
 @router.get("/config", response_model=RaffleConfig)
