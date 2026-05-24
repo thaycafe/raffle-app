@@ -1,4 +1,20 @@
 {
+  "raffle": {
+    "title": "Rifa da coméia pra amiga abelhuda - Brenda",
+    "description": "Contribua para que uma de nós - uma mulher lésbica artista, atriz, escritora, produtora e terapeuta tântrica (que está também próxima do seu aniversário) se estabeleça no seu percurso profissional por conta própria",
+    "items": [
+      {
+        "position": "1º",
+        "title": "Auto-cuidado top",
+        "description": "massagem + pedicure/manicure + brushing/corte"
+      },
+      {
+        "position": "2º",
+        "title": "Dia de Princesa",
+        "description": "pedicure/manicure + brushing/corte"
+      }
+    ]
+  },
   "loading": "Carregando...",
   "header": {
     "prizes": "Prêmios:",
