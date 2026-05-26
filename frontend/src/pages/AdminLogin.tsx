@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import LanguageToggle from '../components/LanguageToggle'
-import { setAuth, encodeCredentials } from '../lib/auth'
+import LanguageToggle from '../components/shared/LanguageToggle'
+import FloatingParticles from '../components/shared/FloatingParticles'
+import { setAuth, encodeCredentials } from '../service/auth'
 import { Eye, EyeOff } from 'lucide-react'
 
 function AdminLogin() {
@@ -46,49 +47,52 @@ function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <FloatingParticles count={14} />
+
+      <div className="relative w-full max-w-sm" style={{ zIndex: 10 }}>
         <div className="flex justify-end mb-2">
           <LanguageToggle />
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-8">
-          <h1 className="text-2xl font-bold text-slate-900 mb-6">{t('admin.title')}</h1>
+        <div className="bg-(--bg-surface) rounded-2xl shadow-sm p-8 border border-(--gold-dark)/50">
+          <h1 className="text-(--gold-light) text-2xl font-bold mb-6 text-center">{t('admin.title')}</h1>
 
           <input
             type="text"
             placeholder={t('admin.username')}
             value={user}
             onChange={(e) => setUser(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border border-slate-300 mb-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-3 rounded-lg bg-(--bg-base) border border-(--gold-dark) text-(--gold-mid) placeholder-(--gold-dark) mb-3 focus:outline-none focus:ring-2 focus:ring-(--gold-mid) focus:border-(--gold-mid) transition"
             autoComplete="username"
           />
+
           <div className="relative mb-4">
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder={t('admin.password')}
               value={pass}
-              onChange={e => setPass(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleLogin()}
-              className="w-full px-4 py-3 pr-12 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              onChange={(e) => setPass(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+              className="w-full px-4 py-3 pr-12 rounded-lg bg-(--bg-base) border border-(--gold-dark) text-(--gold-mid) placeholder-(--gold-dark) focus:outline-none focus:ring-2 focus:ring-(--gold-mid) focus:border-(--gold-mid) transition"
               autoComplete="current-password"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? t('admin.hidePassword') : t('admin.showPassword')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-(--gold-dark) hover:text-(--gold-mid) transition cursor-pointer"
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
-          {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
+          {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
 
           <button
             onClick={handleLogin}
             disabled={submitting}
-            className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:bg-slate-300 transition"
+            className="w-full bg-(--gold-mid) text-(--bg-base) py-3 rounded-lg font-bold hover:bg-(--gold-light) disabled:bg-(--bg-surface) disabled:text-(--gold-dark)/50 disabled:border disabled:border-(--gold-dark)/30 disabled:cursor-not-allowed transition"
           >
             {submitting ? t('admin.signingIn') : t('admin.signIn')}
           </button>
