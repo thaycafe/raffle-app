@@ -1,6 +1,6 @@
 :root {
-    --bg-base: #0e0b07; /* página / input background */
-    --bg-surface: #1c1710; /* cards e secções */
+    --bg-base: rgb(14 11 7 / 0.84); /* página / input background */
+    --bg-surface: rgb(28 23 16 / 0.54); /* cards e secções */
     --bg-surface-hover: #231d10; /* hover de card */
 
     --gold-dark: #7a5c1e; /* ouro escuro — bordas, fundos subtis */
@@ -13,31 +13,6 @@
     --dot-grid: 2.25rem; /* 36px — grelha de pontos do favo */
     --dot-offset: 1.125rem; /* 18px — deslocamento dos pontos alternados */
 }
-
-
-/*@font-face {
-    font-family: 'Futura';
-    src: url('./src/assets/Futura Medium Condensed.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Futura';
-    src: url('./src/assets/Futura Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Futura';
-    src: url('./src/assets/Futura Book.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}*/
 
 @layer base {
     button:not(:disabled) {
