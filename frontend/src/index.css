@@ -1,13 +1,62 @@
-@import "tailwindcss";
+:root {
+    --bg-base: rgb(14 11 7 / 0.84); /* página / input background */
+    --bg-surface: rgb(28 23 16 / 0.54); /* cards e secções */
+    --bg-surface-hover: #231d10; /* hover de card */
 
-@layer base {
-  button:not(:disabled) {
-    cursor: pointer;
-  }
+    --gold-dark: #7a5c1e; /* ouro escuro — bordas, fundos subtis */
+    --gold-mid: #c9963c; /* ouro principal — títulos, botões, destaque */
+    --gold-light: #d4b066; /* ouro claro — texto secundário */
+    --gold-whisper: #fff3c4; /* ouro quase branco — ponto máximo do shimmer */
+
+    --stripe-size: 1.75rem; /* 28px — largura de uma listra */
+    --stripe-cycle: 3.5rem; /* 56px — ciclo completo (listra × 2) */
+    --dot-grid: 2.25rem; /* 36px — grelha de pontos do favo */
+    --dot-offset: 1.125rem; /* 18px — deslocamento dos pontos alternados */
 }
 
+@layer base {
+    button:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+.font-futura-regular {
+    font-family: 'Futura', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+}
+.font-futura-book {
+    font-family: 'Futura', sans-serif;
+    font-weight: 300;
+}
+.font-futura-medium {
+    font-family: 'Futura', sans-serif;
+    font-weight: 500;
+}
+
+
 body {
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  background: #f9fafb;
+    margin: 0;
+    font-family:
+            'Futura',
+            system-ui,
+            -apple-system,
+            sans-serif;
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    background-image:
+            radial-gradient(
+                    circle,
+                    color-mix(in srgb, var(--gold-dark) 9%, transparent) 1.5px,
+                    transparent 1.5px
+            ),
+            radial-gradient(
+                    circle,
+                    color-mix(in srgb, var(--gold-mid) 5%, transparent) 1.5px,
+                    transparent 1.5px
+            );
+    background-size: var(--dot-grid) var(--dot-grid);
+    background-position:
+            0 0,
+            var(--dot-offset) var(--dot-offset);
 }

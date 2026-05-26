@@ -30,8 +30,8 @@ raffle-app/
 │   └── .env.example         # Env vars template
 └── frontend/
     ├── src/
-    │   ├── App.jsx
-    │   └── main.jsx
+    │   ├── App.tsx
+    │   └── main.tsx
     ├── package.json
     └── vite.config.js       # Proxies /api → backend
 ```
@@ -52,8 +52,8 @@ cp .env.example .env
 | `RAFFLE_TOTAL_NUMBERS` | 100 | Total number of tickets (1 to N) |
 | `RAFFLE_PRICE` | 5.00 | Price per ticket |
 | `RAFFLE_CURRENCY` | EUR | Currency code |
-| `ADMIN_USERNAME` | admin | Admin area username |
-| `ADMIN_PASSWORD` | changeme | Admin area password (**change this!**) |
+| `ADMIN_USERNAME` | admin | AdminDashboard area username |
+| `ADMIN_PASSWORD` | changeme | AdminDashboard area password (**change this!**) |
 
 ## Running locally
 
@@ -86,7 +86,7 @@ Vite starts at `http://localhost:5173` and proxies `/api/*` to the backend.
 - `POST /reserve` — reserves a number, expects `{number, name, phone}`
 - `GET /config` — returns the raffle's public configuration
 
-### Admin (HTTP Basic Auth)
+### AdminDashboard (HTTP Basic Auth)
 
 - `GET /admin/tickets` — full reservation list with name, phone, paid status
 

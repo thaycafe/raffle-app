@@ -1,4 +1,20 @@
 {
+  "raffle": {
+    "title": "Rifa da colméia pra amiga abelhuda - Brenda",
+    "description": "Contribua para que uma de nós,  uma mulher lésbica artista, atriz, escritora, produtora e terapeuta tântrica, se estabeleça no seu percurso profissional por conta própria",
+    "items": [
+      {
+        "position": "1º",
+        "title": "Auto-cuidado top",
+        "description": "massagem + pedicure/manicure + brushing/corte"
+      },
+      {
+        "position": "2º",
+        "title": "Dia de Princesa",
+        "description": "pedicure/manicure + brushing/corte"
+      }
+    ]
+  },
   "loading": "Carregando...",
   "header": {
     "prizes": "Prêmios:",
@@ -20,7 +36,11 @@
     "submitting": "Reservando...",
     "failed": "Não foi possível reservar",
     "selectedCount": "{{count}} número(s) selecionado(s)",
-    "noneSelected": "Nenhum número selecionado ainda"
+    "noneSelected": "Nenhum número selecionado ainda",
+    "nameRequired": "O nome é obrigatório",
+    "phoneRequired": "O telefone é obrigatório",
+    "phoneInvalid": "Apenas dígitos, espaços e + ( ) - são permitidos",
+    "phoneMinLength": "O telefone deve ter pelo menos 9 dígitos"
   },
   "language": {
     "label": "Idioma",
@@ -28,7 +48,7 @@
     "pt": "Português"
   },
   "admin": {
-    "title": "Admin",
+    "title": "Painel de Administração",
     "username": "Usuário",
     "password": "Senha",
     "showPassword": "Mostrar senha",
