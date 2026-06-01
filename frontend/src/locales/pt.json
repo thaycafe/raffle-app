@@ -69,7 +69,11 @@
     "paidNo": "Pendente",
     "actions": "Ações",
     "delete": "Remover",
-    "confirmDelete": "Remover a reserva do número {{number}}?"
+    "confirmDelete": "Remover a reserva do número {{number}}?",
+    "people": "pessoas",
+    "numbers": "Números",
+    "markAllPaid": "Marcar tudo pago",
+    "confirmMarkAllPaid": "Marcar {{count}} bilhete(s) de {{name}} como pago?"
   },
   "footer": {
     "admin": "Admin"
