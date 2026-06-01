@@ -69,7 +69,12 @@
     "signingIn": "Signing in...",
     "actions": "Actions",
     "delete": "Delete",
-    "confirmDelete": "Remove reservation for number {{number}}?"
+    "confirmDelete": "Remove reservation for number {{number}}?",
+    "people": "people",
+    "numbers": "Numbers",
+    "markAllPaid": "Mark all paid",
+    "confirmMarkAllPaid": "Mark {{count}} ticket(s) from {{name}} as paid?"
+
   },
   "footer": {
     "admin": "Admin"
