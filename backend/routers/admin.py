@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+import random
+
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from auth import require_admin
 from database import get_db
 from models import Ticket
-from schemas import TicketAdmin, TicketPaidUpdate
+from schemas import DrawResultResponse, TicketAdmin, TicketPaidUpdate
 
 router = APIRouter(
     prefix="/admin",
@@ -42,3 +44,26 @@ def delete_ticket(number: int, db: Session = Depends(get_db)):
     db.delete(ticket)
     db.commit()
     return None
+
+
+@router.post("/draw", response_model=list[DrawResultResponse])
+def draw(winners: int = Query(1, ge=1), db: Session = Depends(get_db)):
+    tickets = db.query(Ticket).all()
+
+    if len(tickets) < winners:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Not enough reservations: {len(tickets)} reserved, {winners} prizes",
+        )
+
+    selected = random.sample(tickets, winners)
+
+    return [
+        DrawResultResponse(
+            position=i + 1,
+            number=ticket.number,
+            name=ticket.name,
+            phone=ticket.phone,
+        )
+        for i, ticket in enumerate(selected)
+    ]
