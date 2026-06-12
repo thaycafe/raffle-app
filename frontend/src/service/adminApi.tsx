@@ -44,10 +44,3 @@ export const drawWinners = (winners = 1): Promise<DrawResult[]> =>
     method: 'POST',
     headers: authHeader(),
   }).then(handle<DrawResult[]>)
-
-export const confirmDrawWinner = (winner: DrawResult): Promise<DrawResult[]> =>
-  fetch('/api/admin/draw', {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(winner),
-  }).then(handle<DrawResult[]>)
