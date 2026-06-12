@@ -49,10 +49,11 @@ class Clock {
       )
         return null
 
-      // Replace the entire Clock class definition (from the JSDoc @deprecated
-      // comment that precedes it up to the closing brace) with our Timer shim.
+      // Replace just the Clock class body with our Timer-backed shim.
+      // Use a tight regex anchored to `class Clock` to avoid accidentally
+      // matching earlier content in the bundled file.
       const replaced = code.replace(
-        /\/\*\*[\s\S]*?@deprecated since r183[\s\S]*?\*\/\s*class Clock \{[\s\S]*?\n}/,
+        /class Clock \{[\s\S]*?\n\}/,
         CLOCK_SHIM
       )
 
