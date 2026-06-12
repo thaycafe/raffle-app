@@ -22,8 +22,9 @@
     "available": "disponíveis",
     "taken": "reservados"
   },
-  "success": {
-    "reservedMultiple": "Números <0>{{numbers}}</0> reservados para <0>{{name}}</0>."
+  "toast": {
+    "reservationFailed": "Não foi possível reservar os números {{numbers}}. Tente novamente.",
+    "reservationSuccess": "Números {{numbers}} reservados para {{name}}."
   },
   "pickNumber": "Escolha um número",
   "yourDetails": "Seus dados",
@@ -43,9 +44,8 @@
     "phoneMinLength": "O telefone deve ter pelo menos 9 dígitos"
   },
   "language": {
-    "label": "Idioma",
-    "en": "English",
-    "pt": "Português"
+    "en": "EN",
+    "pt": "PT"
   },
   "admin": {
     "title": "Painel de Administração",
@@ -63,19 +63,71 @@
     "empty": "Sem reservas ainda.",
     "name": "Nome",
     "phone": "Telefone",
-    "paid": "Pago",
+    "status": "Status",
+    "registerPayment": "Registrar Pagamento",
+    "removeTicket": "Remover Ticket",
     "reservedAt": "Reservado em",
     "paidYes": "Pago",
     "paidNo": "Pendente",
-    "actions": "Ações",
-    "delete": "Remover",
-    "confirmDelete": "Remover a reserva do número {{number}}?",
+    "markAsPaid": "Marcar como pago",
+    "markAsPending": "Marcar como pendente",
+    "markAllPaid": "Marcar tudo pago",
+    "startRaffle": "Iniciar Sorteio",
     "people": "pessoas",
     "numbers": "Números",
-    "markAllPaid": "Marcar tudo pago",
-    "confirmMarkAllPaid": "Marcar {{count}} bilhete(s) de {{name}} como pago?"
+    "confirmMarkAllPaid": "Marcar {{count}} bilhete(s) de {{name}} como pago?",
+    "deleteModal": {
+      "titleSingle": "Deletar reserva",
+      "titleGroup": "Deletar reservas",
+      "messageSingle": "Tem certeza que quer deletar a reserva {{numbers}} de {{name}}?",
+      "messageGroup": "Tem certeza que quer deletar as reservas {{numbers}} de {{name}}?",
+      "confirm": "Deletar",
+      "cancel": "Cancelar"
+    },
+    "markPaidModal": {
+      "title": "Marcar como pago",
+      "message": "Marcar {{count}} bilhete(s) pendente(s) de {{name}} como pago?",
+      "confirm": "Confirmar"
+    },
+    "raffleModal": {
+      "title": "Selecione o prêmio",
+      "message": "Para sortear um número escolha um premio, caso queira refazer o sorteio para um prêmio já sorteado, selecione o prêmio novamente e clique em resetar.",
+      "drawn": "Sorteado",
+      "reset": "Resetar",
+      "cancel": "Cancelar",
+      "draw": "Sortear"
+    },
+    "raffleOverlay": {
+      "title": "Sorteio",
+      "result": "Resultado do Sorteio",
+      "winnerNumber": "Numero Vencedor",
+      "prize": "Premio",
+      "ticketDrawn": "Ticket Sorteado",
+      "backToPrizeSelection": "Voltar a Selecao de Premio",
+      "reroll": "Sortear Novamente",
+      "close": "Fechar",
+      "keepWinnerModal": {
+        "title": "Manter vencedor",
+        "message": "Gostaria de manter o número #{{number}} como vencedor?",
+        "confirm": "Sim",
+        "cancel": "Não"
+      }
+    },
+    "toast": {
+      "markedPaid": "Número #{{number}} marcado como pago",
+      "markedUnpaid": "Número #{{number}} marcado como pendente",
+      "deleted": "Reserva #{{number}} removida",
+      "groupPaid": "{{count}} bilhete(s) de {{name}} marcados como pagos",
+      "groupDeleted": "{{count}} reserva(s) de {{name}} removida(s)"
+    },
+    "errors": {
+      "loadFailed": "Falha ao carregar reservas",
+      "updateFailed": "Falha ao atualizar bilhete",
+      "deleteFailed": "Falha ao remover reserva"
+    }
   },
   "footer": {
-    "admin": "Admin"
+    "admin": "Admin",
+    "raffle": "Rifa"
   }
 }

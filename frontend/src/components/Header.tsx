@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next'
-import type { Config, Ticket } from '../../types'
+import type { Configuration, Ticket } from '../types/home'
 
 type Props = {
-  config: Config
+  config: Configuration
   tickets: Ticket[]
 }
 
-export default function Header({config, tickets}: Props) {
+export default function Header({ config, tickets }: Props) {
   const { t } = useTranslation()
 
   const takenCount = tickets.filter((ticket) => ticket.taken).length

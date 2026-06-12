@@ -1,4 +1,4 @@
-import type { Ticket } from '../../types'
+import type { Ticket } from '../../types/home'
 import styles from './TicketGrid.module.css'
 
 type Props = {

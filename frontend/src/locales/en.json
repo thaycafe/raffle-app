@@ -9,7 +9,7 @@
         "description": "massage + pedicure/manicure + brushing/haircut"
       },
       {
-        "position": "1º",
+        "position": "2º",
         "title": "Princess Day",
         "description": "pedicure/manicure + brushing/haircut"
       }
@@ -21,9 +21,6 @@
     "perTicket": "per ticket",
     "available": "available",
     "taken": "taken"
-  },
-  "success": {
-    "reservedMultiple": "Numbers <0>{{numbers}}</0> reserved for <0>{{name}}</0>."
   },
   "pickNumber": "Pick a number",
   "yourDetails": "Your details",
@@ -43,9 +40,8 @@
     "phoneMinLength": "Phone number must be at least 9 digits"
   },
   "language": {
-    "label": "Language",
-    "en": "English",
-    "pt": "Português"
+    "en": "EN",
+    "pt": "PT"
   },
   "admin": {
     "title": "Admin Panel",
@@ -61,22 +57,74 @@
     "empty": "No reservations yet.",
     "name": "Name",
     "phone": "Phone",
-    "paid": "Paid",
+    "status": "Status",
+    "registerPayment": "Register Payment",
+    "removeTicket": "Remove Ticket",
     "reservedAt": "Reserved at",
     "paidYes": "Paid",
     "paidNo": "Pending",
+    "markAsPaid": "Mark as paid",
+    "markAsPending": "Mark as pending",
     "missingFields": "Fill in username and password",
     "signingIn": "Signing in...",
-    "actions": "Actions",
     "delete": "Delete",
-    "confirmDelete": "Remove reservation for number {{number}}?",
     "people": "people",
     "numbers": "Numbers",
     "markAllPaid": "Mark all paid",
-    "confirmMarkAllPaid": "Mark {{count}} ticket(s) from {{name}} as paid?"
-
+    "startRaffle": "Start Raffle",
+    "confirmMarkAllPaid": "Mark {{count}} ticket(s) from {{name}} as paid?",
+    "deleteModal": {
+      "titleSingle": "Delete reservation",
+      "titleGroup": "Delete reservations",
+      "messageSingle": "Are you sure you want to delete reservation {{numbers}} from {{name}}?",
+      "messageGroup": "Are you sure you want to delete reservations {{numbers}} from {{name}}?",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    },
+    "markPaidModal": {
+      "title": "Mark as paid",
+      "message": "Mark {{count}} pending ticket(s) from {{name}} as paid?",
+      "confirm": "Confirm"
+    },
+    "raffleModal": {
+      "title": "Select raffle prize",
+      "message": "To draw a number, choose a prize. If you want to rerun the draw for a prize that was already drawn, select the same prize again and click reset draw.",
+      "drawn": "Drawn",
+      "reset": "Reset",
+      "cancel": "Cancel",
+      "draw": "Draw"
+    },
+    "raffleOverlay": {
+      "title": "Raffle",
+      "result": "Raffle Result",
+      "winnerNumber": "Winning Number",
+      "prize": "Prize",
+      "ticketDrawn": "Ticket Drawn",
+      "backToPrizeSelection": "Back to Prize Selection",
+      "reroll": "Draw Again",
+      "close": "Close",
+      "keepWinnerModal": {
+        "title": "Keep winner",
+        "message": "Would you like to keep number #{{number}} as the winner?",
+        "confirm": "Yes",
+        "cancel": "No"
+      }
+    },
+    "toast": {
+      "markedPaid": "Number #{{number}} marked as paid",
+      "markedUnpaid": "Number #{{number}} marked as unpaid",
+      "deleted": "Reservation #{{number}} removed",
+      "groupPaid": "{{count}} ticket(s) from {{name}} marked as paid",
+      "groupDeleted": "{{count}} reservation(s) from {{name}} removed"
+    },
+    "errors": {
+      "loadFailed": "Failed to load reservations",
+      "updateFailed": "Failed to update ticket",
+      "deleteFailed": "Failed to remove reservation"
+    }
   },
   "footer": {
-    "admin": "Admin"
+    "admin": "Admin",
+    "raffle": "Raffle"
   }
 }
