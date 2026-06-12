@@ -2,12 +2,12 @@ import { useTranslation } from 'react-i18next'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import type { Config } from '../types'
+import type { Configuration } from '../types/home'
 import React from 'react'
 
 type Props = {
   selected: number[]
-  config: Config
+  config: Configuration
   onReserve: (name: string, phone: string) => Promise<void>
 }
 

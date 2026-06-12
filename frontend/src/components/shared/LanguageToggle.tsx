@@ -16,7 +16,7 @@ function LanguageToggle() {
           i18n.resolvedLanguage === 'en' ? 'text-slate-900' : 'text-(--gold-mid)'
         }`}
       >
-        EN
+        {t('language.en')}
       </button>
       <button
         onClick={() => i18n.changeLanguage('pt')}
@@ -25,7 +25,7 @@ function LanguageToggle() {
           i18n.resolvedLanguage === 'pt' ? 'text-slate-900' : 'text-(--gold-mid)'
         }`}
       >
-        PT
+        {t('language.pt')}
       </button>
       <div
         className={`absolute top-1 bottom-1 w-[calc(50%-4px)] bg-(--gold-light) rounded-full shadow-sm transition-all duration-200 ${
