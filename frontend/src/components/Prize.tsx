@@ -1,7 +1,7 @@
-import type { Prize } from '../../types'
+import type { Prize } from '../types/home'
 import { useTranslation } from 'react-i18next'
 
-export default function Prize(){
+export default function Prize() {
   const { t } = useTranslation()
   const rawPrizes = t('raffle.items', { returnObjects: true })
   const prizes: Prize[] = Array.isArray(rawPrizes) ? (rawPrizes as Prize[]) : []

@@ -3,7 +3,7 @@ export type Ticket = {
   taken: boolean
 }
 
-export type Config = {
+export type Configuration = {
   price: number
   currency: string
   total_numbers: number
@@ -14,13 +14,3 @@ export type Prize = {
   title: string
   description?: string
 }
-
-export type SuccessState = {
-  numbers: number[]
-  name: string
-}
-
-export type ReserveResponse = {
-  reserved: number[]
-}
-
