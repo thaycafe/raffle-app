@@ -1,4 +1,20 @@
 {
+  "raffle": {
+    "title": "The Hive Raffle for the Bee-sty Friend - Brenda",
+    "description": "Help one of us — a lesbian woman, artist, actress, writer, producer and tantric therapist (who also has a birthday coming up) — establish herself in her own professional path.",
+    "items": [
+      {
+        "position": "1º",
+        "title": "Self-care Premium",
+        "description": "massage + pedicure/manicure + blow-dry/haircut"
+      },
+      {
+        "position": "1º",
+        "title": "Princess Day",
+        "description": "pedicure/manicure + blow-dry/haircut"
+      }
+    ]
+  },
   "loading": "Loading...",
   "header": {
     "prizes": "Prizes:",
