@@ -1,119 +1,87 @@
-@import "tailwindcss";
+:root {
+    --bg-base: #0e0b07; /* página / input background */
+    --bg-surface: #1c1710; /* cards e secções */
+    --bg-surface-hover: #231d10; /* hover de card */
 
-@font-face {
-  font-family: 'Futura';
-  src: url('./assets/Futura Medium Condensed.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
+    --gold-dark: #7a5c1e; /* ouro escuro — bordas, fundos subtis */
+    --gold-mid: #c9963c; /* ouro principal — títulos, botões, destaque */
+    --gold-light: #d4b066; /* ouro claro — texto secundário */
+    --gold-whisper: #fff3c4; /* ouro quase branco — ponto máximo do shimmer */
+
+    --stripe-size: 1.75rem; /* 28px — largura de uma listra */
+    --stripe-cycle: 3.5rem; /* 56px — ciclo completo (listra × 2) */
+    --dot-grid: 2.25rem; /* 36px — grelha de pontos do favo */
+    --dot-offset: 1.125rem; /* 18px — deslocamento dos pontos alternados */
+}
+
+
+/*@font-face {
+    font-family: 'Futura';
+    src: url('./src/assets/Futura Medium Condensed.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura';
-  src: url('./assets/Futura Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Futura';
+    src: url('./src/assets/Futura Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Futura';
-  src: url('./assets/Futura Book.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+    font-family: 'Futura';
+    src: url('./src/assets/Futura Book.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}*/
 
 @layer base {
-  button:not(:disabled) {
-    cursor: pointer;
-  }
+    button:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
-.font-futura-regular { font-family: 'Futura', sans-serif; font-weight: 400; }
-.font-futura-book    { font-family: 'Futura', sans-serif; font-weight: 300; }
-.font-futura-medium  { font-family: 'Futura', sans-serif; font-weight: 500; }
+.font-futura-regular {
+    font-family: 'Futura', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+}
+.font-futura-book {
+    font-family: 'Futura', sans-serif;
+    font-weight: 300;
+}
+.font-futura-medium {
+    font-family: 'Futura', sans-serif;
+    font-weight: 500;
+}
+
 
 body {
-  margin: 0;
-  font-family: 'Futura', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.8;
-  background: repeating-linear-gradient(
-          -45deg,
-          #0c0f14 0px,
-          #0c0f14 28px,
-          #da8326 28px,
-          #da8326 56px
-  );
-}
-
-.bee-header {
-  background: repeating-linear-gradient(
-    -45deg,
-    rgba(12, 15, 20, 0.4) 0px,
-    rgba(12, 15, 20, 0.4) 28px,
-    rgba(120, 53, 15, 0.4) 28px,
-    rgba(120, 53, 15, 0.4) 56px
-  );
-
-  border: 1px solid rgba(251, 191, 36, 0.3);
-  backdrop-filter: blur(4px);
-}
-
-.flip-card {
-  perspective: 600px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-
-.flip-card-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.flip-card-front {
-  background-color: #0c0f14;
-  border: 1px solid rgb(217 98 37 / 0.67);
-  color: #da8326;
-}
-
-.flip-card-front:hover {
-  border-color: #da8326;
-  background-color: #1a1008;
-}
-
-.flip-card-back {
-  background-color: #da8326;
-  color: #0c0f14;
-  font-weight: 700;
-  transform: rotateY(180deg);
-  border: 2px solid #D96225;
-  box-shadow: 0 4px 12px rgba(218, 131, 38, 0.5);
+    margin: 0;
+    font-family:
+            'Futura',
+            system-ui,
+            -apple-system,
+            sans-serif;
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    background-image:
+            radial-gradient(
+                    circle,
+                    color-mix(in srgb, var(--gold-dark) 9%, transparent) 1.5px,
+                    transparent 1.5px
+            ),
+            radial-gradient(
+                    circle,
+                    color-mix(in srgb, var(--gold-mid) 5%, transparent) 1.5px,
+                    transparent 1.5px
+            );
+    background-size: var(--dot-grid) var(--dot-grid);
+    background-position:
+            0 0,
+            var(--dot-offset) var(--dot-offset);
 }
