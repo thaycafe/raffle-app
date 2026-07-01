@@ -56,7 +56,9 @@ function AdminLogin() {
         </div>
 
         <div className="bg-(--bg-surface) rounded-2xl shadow-sm p-8 border border-(--gold-dark)/50">
-          <h1 className="text-(--gold-light) text-2xl font-bold mb-6 text-center">{t('admin.title')}</h1>
+          <h1 className="text-(--gold-light) text-2xl font-bold mb-6 text-center">
+            {t('admin.title')}
+          </h1>
 
           <input
             type="text"
