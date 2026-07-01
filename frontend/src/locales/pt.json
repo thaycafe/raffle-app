@@ -90,8 +90,8 @@
       "confirm": "Confirmar"
     },
     "raffleModal": {
-      "title": "Selecione o premio do sorteio",
-      "message": "Para sortear um numero escolha um premio, caso queira refazer o sorteio para um premio ja sorteado, selecione o premio novamente e clique em resetar sorteio.",
+      "title": "Selecione o prêmio",
+      "message": "Para sortear um número escolha um premio, caso queira refazer o sorteio para um prêmio já sorteado, selecione o prêmio novamente e clique em resetar.",
       "drawn": "Sorteado",
       "reset": "Resetar",
       "cancel": "Cancelar",
